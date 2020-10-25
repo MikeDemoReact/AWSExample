@@ -20,8 +20,8 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          keys:
-           - app-{{ checksum "package.json" }}
+          key:
+            app-{{ checksum "package.json" }}
       
 deploy-to-aws-s3:
   docker:
@@ -103,23 +103,23 @@ workflows:
     jobs:
       - build
       - deploy-to-aws-s3:
-        requires:
-          - build
-        filters:
-          branches:
-            only:
-              - develop
-              - staging
-              - master
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
       - deploy-to-aws-cloudfront:
-        requires:
+          requires:
           - deploy-to-aws-s3
-        filters:
-          branches:
-            only:
-              - develop
-              - staging
-              - master
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
 
 
 
