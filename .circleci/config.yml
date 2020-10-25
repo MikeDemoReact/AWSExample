@@ -85,6 +85,9 @@ jobs:
             zip ../build.zip -r * .[^.]*
             echo "Build Successful"
       - run:
+          name: Show DEV_DISTRIBUTION_ID
+          command: echo ${DEV_DISTRIBUTION_ID}            
+      - run:
           name: Deploy to AWS Cloudfront
           command: |
             aws configure set preview.cloudfront
